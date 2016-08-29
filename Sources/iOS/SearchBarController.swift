@@ -59,6 +59,7 @@ open class SearchBarController: RootController {
      */
 	open override func layoutSubviews() {
 		super.layoutSubviews()
+<<<<<<< HEAD
         
         searchBar.grid.layoutEdgeInsets.top = .phone == Device.userInterfaceIdiom && Device.isLandscape ? 0 : 20
         
@@ -73,6 +74,28 @@ open class SearchBarController: RootController {
         rootViewController.view.height = h - p
         
         searchBar.divider.reload()
+=======
+		if let v: SearchBar = searchBar {
+            
+            #if MATERIAL_APP_EXTENSIONS
+                let isLandscapePhone = MaterialDevice.type == .iPhone && self.traitCollection.verticalSizeClass == .compact
+            #else
+                let isLandscapePhone = (MaterialDevice.type == .iPhone && MaterialDevice.isLandscape)
+            #endif
+            
+            v.grid.layoutInset.top = isLandscapePhone ? 0 : 20
+			
+			let h: CGFloat = MaterialDevice.height
+			let w: CGFloat = MaterialDevice.width
+			let p: CGFloat = v.intrinsicContentSize().height + v.grid.layoutInset.top + v.grid.layoutInset.bottom
+			
+			v.width = w + v.grid.layoutInset.left + v.grid.layoutInset.right
+			v.height = p
+			
+			rootViewController.view.frame.origin.y = p
+			rootViewController.view.frame.size.height = h - p
+		}
+>>>>>>> 10a61d8... Extension safe for swift 2.3
 	}
 	
 	/**

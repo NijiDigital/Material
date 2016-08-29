@@ -1018,21 +1018,36 @@ public class NavigationDrawerController: RootController, UIGestureRecognizerDele
 	
 	/// Shows the statusBar.
 	private func showStatusBar() {
+<<<<<<< HEAD
 		if isStatusBarHidden {
 			isStatusBarHidden = false
 			DispatchQueue.main.async { [weak self] in
 				if let s = self {
 					if let v = UIApplication.shared.keyWindow {
+=======
+        #if MATERIAL_APP_EXTENSIONS
+            preconditionFailure("showStatusBar is not extension safe")
+        #else
+		if statusBarHidden {
+			statusBarHidden = false
+			dispatch_async(dispatch_get_main_queue(), { [weak self] in
+				if let s: NavigationDrawerController = self {
+					if let v: UIWindow = UIApplication.sharedApplication().keyWindow {
+>>>>>>> 10a61d8... Extension safe for swift 2.3
 						v.windowLevel = UIWindowLevelNormal
 						s.delegate?.navigationDrawerStatusBarHiddenState?(navigationDrawerController: s, hidden: false)
 					}
 				}
 			}
 		}
+        #endif
 	}
 	
 	/// Hides the statusBar.
 	private func hideStatusBar() {
+        #if MATERIAL_APP_EXTENSIONS
+            preconditionFailure("hideStatusBar is not extension safe")
+        #else
 		if enableHideStatusBar {
 			if !isStatusBarHidden {
 				isStatusBarHidden = true
@@ -1046,6 +1061,7 @@ public class NavigationDrawerController: RootController, UIGestureRecognizerDele
 				}
 			}
 		}
+        #endif
 	}
 	
 	/// Toggles the statusBar

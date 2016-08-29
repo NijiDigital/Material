@@ -528,6 +528,21 @@ open class TextField: UITextField {
     
     /// Prepares the textAlignment.
     private func prepareTextAlignment() {
+<<<<<<< HEAD
         textAlignment = .rightToLeft == UIApplication.shared.userInterfaceLayoutDirection ? .right : .left
+=======
+        //textAlignment = .RightToLeft == UIApplication.sharedApplication().userInterfaceLayoutDirection ? .Right : .Left
+        #if MATERIAL_APP_EXTENSIONS
+            //can't use shared in app extension
+            //fall back to checking the bundle's preferred localization character direction
+            //Courtesy of PureLayout
+            let isRightToLeftLayout = NSLocale.characterDirection(forLanguage: Bundle.main.preferredLocalizations[0]) == .rightToLeft
+        #else
+            let isRightToLeftLayout = UIApplication.sharedApplication().userInterfaceLayoutDirection == .RightToLeft
+        #endif
+
+        textAlignment = isRightToLeftLayout ? .Right : .Left
+
+>>>>>>> 10a61d8... Extension safe for swift 2.3
     }
 }

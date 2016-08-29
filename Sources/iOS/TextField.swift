@@ -529,14 +529,17 @@ open class TextField: UITextField {
     /// Prepares the textAlignment.
     private func prepareTextAlignment() {
 <<<<<<< HEAD
+<<<<<<< HEAD
         textAlignment = .rightToLeft == UIApplication.shared.userInterfaceLayoutDirection ? .right : .left
 =======
         //textAlignment = .RightToLeft == UIApplication.sharedApplication().userInterfaceLayoutDirection ? .Right : .Left
+=======
+>>>>>>> d28e1f5... Clean code and conversion to swift 2.3
         #if MATERIAL_APP_EXTENSIONS
             //can't use shared in app extension
             //fall back to checking the bundle's preferred localization character direction
             //Courtesy of PureLayout
-            let isRightToLeftLayout = NSLocale.characterDirection(forLanguage: Bundle.main.preferredLocalizations[0]) == .rightToLeft
+            let isRightToLeftLayout = NSLocale.characterDirectionForLanguage(NSBundle.mainBundle().preferredLocalizations[0]) == .RightToLeft
         #else
             let isRightToLeftLayout = UIApplication.sharedApplication().userInterfaceLayoutDirection == .RightToLeft
         #endif

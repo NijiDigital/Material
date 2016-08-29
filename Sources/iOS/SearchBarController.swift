@@ -78,7 +78,7 @@ open class SearchBarController: RootController {
 		if let v: SearchBar = searchBar {
             
             #if MATERIAL_APP_EXTENSIONS
-                let isLandscapePhone = MaterialDevice.type == .iPhone && self.traitCollection.verticalSizeClass == .compact
+                let isLandscapePhone = MaterialDevice.type == .iPhone && self.traitCollection.verticalSizeClass == .Compact
             #else
                 let isLandscapePhone = (MaterialDevice.type == .iPhone && MaterialDevice.isLandscape)
             #endif

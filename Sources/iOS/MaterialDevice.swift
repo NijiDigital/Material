@@ -97,7 +97,12 @@ public struct MaterialDevice {
 	
 	/// A Boolean indicating if the device is in Landscape mode.
 	public static var isLandscape: Bool {
-		return UIApplication.sharedApplication().statusBarOrientation.isLandscape
+        #if MATERIAL_APP_EXTENSIONS
+            preconditionFailure("isLandscape is not extension safe")
+            return true
+        #else
+            return UIApplication.sharedApplication().statusBarOrientation.isLandscape
+        #endif
 	}
 	
 	/// A Boolean indicating if the device is in Portrait mode.
@@ -107,29 +112,62 @@ public struct MaterialDevice {
 	
 	/// The current UIInterfaceOrientation value.
 	public static var orientation: UIInterfaceOrientation {
-		return UIApplication.sharedApplication().statusBarOrientation
+        #if MATERIAL_APP_EXTENSIONS
+            preconditionFailure("orientation is not extension safe")
+            return .Unknown
+        #else
+            return UIApplication.sharedApplication().statusBarOrientation
+        #endif
 	}
 	
-	/// Retrieves the device status bar style.
-	public static var statusBarStyle: UIStatusBarStyle {
-		get {
-		return UIApplication.sharedApplication().statusBarStyle
-		}
-		set(value) {
-			UIApplication.sharedApplication().statusBarStyle = value
-		}
-	}
-	
-	/// Retrieves the device status bar hidden state.
-	public static var statusBarHidden: Bool {
-		get {
-		return UIApplication.sharedApplication().statusBarHidden
-		}
-		set(value) {
-			UIApplication.sharedApplication().statusBarHidden = value
-		}
-	}
-	
+
+
+    #if MATERIAL_APP_EXTENSIONS
+    /// Retrieves the device status bar style.
+    public static var statusBarStyle: UIStatusBarStyle {
+    get {
+    preconditionFailure("status bar style is not extension safe")
+    return .Default
+    }
+    set(value) {
+    preconditionFailure("status bar style is not extension safe")
+    }
+    }
+    
+    /// Retrieves the device status bar hidden state.
+    public static var isStatusBarHidden: Bool {
+    get {
+    preconditionFailure("status bar hidden is not extension safe")
+    return false
+    }
+    set(value) {
+    preconditionFailure("status bar hidden is not extension safe")
+    }
+    }
+
+    #else
+
+    /// Retrieves the device status bar style.
+    public static var statusBarStyle: UIStatusBarStyle {
+        get {
+            return UIApplication.sharedApplication().statusBarStyle
+        }
+        set(value) {
+            UIApplication.sharedApplication().statusBarStyle = value
+        }
+    }
+    
+    /// Retrieves the device status bar hidden state.
+    public static var statusBarHidden: Bool {
+        get {
+            return UIApplication.sharedApplication().statusBarHidden
+        }
+        set(value) {
+            UIApplication.sharedApplication().statusBarHidden = value
+        }
+    }
+    #endif
+    
 	/// Retrieves the device bounds.
 	public static var bounds: CGRect {
 		return UIScreen.mainScreen().bounds

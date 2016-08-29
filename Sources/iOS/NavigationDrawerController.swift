@@ -1005,6 +1005,9 @@ public class NavigationDrawerController : RootController, UIGestureRecognizerDel
 	
 	/// Shows the statusBar.
 	private func showStatusBar() {
+        #if MATERIAL_APP_EXTENSIONS
+            preconditionFailure("showStatusBar is not extension safe")
+        #else
 		if statusBarHidden {
 			statusBarHidden = false
 			dispatch_async(dispatch_get_main_queue(), { [weak self] in
@@ -1016,10 +1019,14 @@ public class NavigationDrawerController : RootController, UIGestureRecognizerDel
 				}
 			})
 		}
+        #endif
 	}
 	
 	/// Hides the statusBar.
 	private func hideStatusBar() {
+        #if MATERIAL_APP_EXTENSIONS
+            preconditionFailure("hideStatusBar is not extension safe")
+        #else
 		if enableHideStatusBar {
 			if !statusBarHidden {
 				statusBarHidden = true
@@ -1033,6 +1040,7 @@ public class NavigationDrawerController : RootController, UIGestureRecognizerDel
 				})
 			}
 		}
+        #endif
 	}
 	
 	/// Toggles the statusBar

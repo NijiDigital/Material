@@ -60,7 +60,14 @@ public class SearchBarController : RootController {
 	public override func layoutSubviews() {
 		super.layoutSubviews()
 		if let v: SearchBar = searchBar {
-			v.grid.layoutInset.top = .iPhone == MaterialDevice.type && MaterialDevice.isLandscape ? 0 : 20
+            
+            #if MATERIAL_APP_EXTENSIONS
+                let isLandscapePhone = MaterialDevice.type == .iPhone && self.traitCollection.verticalSizeClass == .compact
+            #else
+                let isLandscapePhone = (MaterialDevice.type == .iPhone && MaterialDevice.isLandscape)
+            #endif
+            
+            v.grid.layoutInset.top = isLandscapePhone ? 0 : 20
 			
 			let h: CGFloat = MaterialDevice.height
 			let w: CGFloat = MaterialDevice.width

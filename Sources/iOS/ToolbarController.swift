@@ -161,7 +161,7 @@ public class ToolbarController : RootController {
 		if let v: Toolbar = toolbar {			
             
             #if MATERIAL_APP_EXTENSIONS
-                let isLandscapePhone = MaterialDevice.type == .iPhone && self.traitCollection.verticalSizeClass == .compact
+                let isLandscapePhone = MaterialDevice.type == .iPhone && self.traitCollection.verticalSizeClass == .Compact
             #else
                 let isLandscapePhone = (MaterialDevice.type == .iPhone && MaterialDevice.isLandscape)
             #endif

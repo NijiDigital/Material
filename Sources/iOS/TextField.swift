@@ -500,8 +500,8 @@ public class TextField : UITextField {
 
 
     if !editing && true == text?.isEmpty {
-      if self.leftView != nil {
-        placeholderLabel.frame = CGRectMake(self.leftView.frame.size.width, bounds.origin.y, bounds.size.width - 30, bounds.size.height)
+      if let leftView = self.leftView {
+        placeholderLabel.frame = CGRectMake(leftView.frame.size.width, bounds.origin.y, bounds.size.width - 30, bounds.size.height)
       } else {
         placeholderLabel.frame = bounds
       }

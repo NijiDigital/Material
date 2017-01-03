@@ -180,44 +180,20 @@ open class ToolbarController: StatusBarController {
 	
 	open override func layoutSubviews() {
 		super.layoutSubviews()
-<<<<<<< HEAD
-		if let v: Toolbar = toolbar {			
-            
-            #if MATERIAL_APP_EXTENSIONS
-                let isLandscapePhone = MaterialDevice.type == .iPhone && self.traitCollection.verticalSizeClass == .Compact
-            #else
-                let isLandscapePhone = (MaterialDevice.type == .iPhone && MaterialDevice.isLandscape)
-            #endif
-            
-            v.grid.layoutInset.top = isLandscapePhone ? 0 : 20
 
-            
-			let h: CGFloat = MaterialDevice.height
-			let w: CGFloat = MaterialDevice.width
-			let p: CGFloat = v.intrinsicContentSize().height + v.grid.layoutInset.top + v.grid.layoutInset.bottom
-			
-			v.width = w + v.grid.layoutInset.left + v.grid.layoutInset.right
-			v.height = p
-			
-			rootViewController.view.frame.origin.y = p
-			rootViewController.view.frame.size.height = h - p
-		}
-=======
+    let y = Application.shouldStatusBarBeHidden || statusBar.isHidden ? 0 : statusBar.height
+    let p = y + toolbar.height
         
-        let y = Application.shouldStatusBarBeHidden || statusBar.isHidden ? 0 : statusBar.height
-        let p = y + toolbar.height
+    toolbar.y = y
+    toolbar.width = view.width
         
-        toolbar.y = y
-        toolbar.width = view.width
-        
-        switch display {
-        case .partial:
-            rootViewController.view.y = p
-            rootViewController.view.height = view.height - p
-        case .full:
-            rootViewController.view.frame = view.bounds
-        }
->>>>>>> upstream/master
+    switch display {
+      case .partial:
+          rootViewController.view.y = p
+          rootViewController.view.height = view.height - p
+      case .full:
+          rootViewController.view.frame = view.bounds
+    }
 	}
 	
 	/**
@@ -232,6 +208,7 @@ open class ToolbarController: StatusBarController {
         prepareStatusBar()
         prepareToolbar()
 	}
+  
 }
 
 extension ToolbarController {

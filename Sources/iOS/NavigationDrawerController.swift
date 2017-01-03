@@ -858,45 +858,6 @@ open class NavigationDrawerController: RootController {
 	}
 	
 	/// Shows the statusBar.
-<<<<<<< HEAD
-	private func showStatusBar() {
-        #if MATERIAL_APP_EXTENSIONS
-            preconditionFailure("showStatusBar is not extension safe")
-        #else
-		if statusBarHidden {
-			statusBarHidden = false
-			dispatch_async(dispatch_get_main_queue(), { [weak self] in
-				if let s: NavigationDrawerController = self {
-					if let v: UIWindow = UIApplication.sharedApplication().keyWindow {
-						v.windowLevel = UIWindowLevelNormal
-						s.delegate?.navigationDrawerStatusBarHiddenState?(s, hidden: false)
-					}
-				}
-			})
-		}
-        #endif
-	}
-	
-	/// Hides the statusBar.
-	private func hideStatusBar() {
-        #if MATERIAL_APP_EXTENSIONS
-            preconditionFailure("hideStatusBar is not extension safe")
-        #else
-		if enableHideStatusBar {
-			if !statusBarHidden {
-				statusBarHidden = true
-				dispatch_async(dispatch_get_main_queue(), { [weak self] in
-					if let s: NavigationDrawerController = self {
-						if let v: UIWindow = UIApplication.sharedApplication().keyWindow {
-							v.windowLevel = UIWindowLevelStatusBar + 1
-							s.delegate?.navigationDrawerStatusBarHiddenState?(s, hidden: true)
-						}
-					}
-				})
-			}
-		}
-        #endif
-=======
 	fileprivate func showStatusBar() {
         DispatchQueue.main.async { [weak self] in
             guard let s = self else {
@@ -932,7 +893,6 @@ open class NavigationDrawerController: RootController {
             
             s.delegate?.navigationDrawerController?(navigationDrawerController: s, statusBar: true)
         }
->>>>>>> upstream/master
 	}
 	
 	/// Toggles the statusBar

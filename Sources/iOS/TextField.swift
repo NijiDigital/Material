@@ -88,12 +88,12 @@ open class TextField: UITextField {
             return 0
         }
         
-        return leftViewOffset + height
+        return leftViewOffset + height      
     }
     
     /// The leftView width value.
-    open var leftViewOffset: CGFloat = 16
-    
+    open var leftViewOffset: CGFloat = 0
+  
     /// Placeholder normal text
     @IBInspectable
     open var leftViewNormalColor = Color.darkText.others {
@@ -482,12 +482,12 @@ extension TextField {
             return
         }
         
-        placeholderLabel.frame = CGRect(x: w, y: 0, width: width - w, height: h)
+        placeholderLabel.frame = CGRect(x: 0, y: 0, width: width - w, height: h)
         placeholderLabel.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
         
         switch textAlignment {
         case .left, .natural:
-            placeholderLabel.x = w
+            placeholderLabel.x = 0
         case .right:
             placeholderLabel.x = width - placeholderLabel.width
         default:break
@@ -523,7 +523,7 @@ extension TextField {
         
         let w = leftViewWidth
         v.frame = CGRect(x: 0, y: 0, width: w, height: height)
-        dividerContentEdgeInsets.left = w
+        dividerContentEdgeInsets.left = 0
     }
 }
 
@@ -626,7 +626,7 @@ extension TextField {
             
             switch s.textAlignment {
             case .left, .natural:
-                s.placeholderLabel.x = s.leftViewWidth
+                s.placeholderLabel.x = 0
             case .right:
                 s.placeholderLabel.x = s.width - s.placeholderLabel.width
             default:break

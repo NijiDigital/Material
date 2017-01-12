@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (C) 2015 - 2016, Daniel Dahan and CosmicMind, Inc. <http://cosmicmind.io>.
-=======
- * Copyright (C) 2015 - 2016, Daniel Dahan and CosmicMind, Inc. <http://cosmicmind.com>.
->>>>>>> upstream/master
+ * Copyright (C) 2015 - 2017, Daniel Dahan and CosmicMind, Inc. <http://cosmicmind.com>.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -16,11 +12,7 @@
  *		this list of conditions and the following disclaimer in the documentation
  *		and/or other materials provided with the distribution.
  *
-<<<<<<< HEAD
- *	*	Neither the name of Material nor the names of its
-=======
  *	*	Neither the name of CosmicMind nor the names of its
->>>>>>> upstream/master
  *		contributors may be used to endorse or promote products derived from
  *		this software without specific prior written permission.
  *
@@ -96,12 +88,12 @@ open class TextField: UITextField {
             return 0
         }
         
-        return leftViewOffset + height
+        return leftViewOffset + height      
     }
     
     /// The leftView width value.
-    open var leftViewOffset: CGFloat = 16
-    
+    open var leftViewOffset: CGFloat = 0
+  
     /// Placeholder normal text
     @IBInspectable
     open var leftViewNormalColor = Color.darkText.others {
@@ -490,12 +482,12 @@ extension TextField {
             return
         }
         
-        placeholderLabel.frame = CGRect(x: w, y: 0, width: width - w, height: h)
+        placeholderLabel.frame = CGRect(x: 0, y: 0, width: width - w, height: h)
         placeholderLabel.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
         
         switch textAlignment {
         case .left, .natural:
-            placeholderLabel.x = w
+            placeholderLabel.x = 0
         case .right:
             placeholderLabel.x = width - placeholderLabel.width
         default:break
@@ -531,7 +523,7 @@ extension TextField {
         
         let w = leftViewWidth
         v.frame = CGRect(x: 0, y: 0, width: w, height: height)
-        dividerContentEdgeInsets.left = w
+        dividerContentEdgeInsets.left = 0
     }
 }
 
@@ -634,7 +626,7 @@ extension TextField {
             
             switch s.textAlignment {
             case .left, .natural:
-                s.placeholderLabel.x = s.leftViewWidth
+                s.placeholderLabel.x = 0
             case .right:
                 s.placeholderLabel.x = s.width - s.placeholderLabel.width
             default:break
@@ -671,5 +663,4 @@ extension TextField {
             self?.isAnimating = false
         }
     }
-
 }
